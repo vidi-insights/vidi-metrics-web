@@ -1,0 +1,36 @@
+{
+  "name": "vidi-metrics-web",
+  "version": "0.1.0",
+  "description": "a web interface for capturing vidi metrics",
+  "main": "./server/start.js",
+  "license": "MIT",
+  "author": "Kristina Matuleviciute (https://github.com/KristinaMatuleviciute)",
+  "contributors": [
+    "Dean McDonnell (http://mcdonnelldean.me/)",
+    "Adrian Rossouw (https://github.com/AdrianRossouw)",
+    "Jane Quinn (https://github.com/CodeWriterWriter)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vidi-insights/vidi-metrics-web.git"
+  },
+  "scripts": {
+    "start": "node ./srv/start.js"
+  },
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "ejs": "~2.3.3",
+    "express": "~4.13.1",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0",
+    "eslint-config-seneca": "1.1.2",
+    "eslint-plugin-hapi": "4.0.x",
+    "eslint-plugin-standard": "1.3.x"
+    
+  }
+}

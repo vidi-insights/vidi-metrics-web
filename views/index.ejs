@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+       <h1> <%= title %> </h1>
+       
+       <!-- SUBMIT FORM -->
+  
+       <form action="/submit" method="post">
+           <div class="form-group">
+               <label>Data</label>
+               <input type="data" class="form-control" name="data">
+           </div>
+
+           <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+       </form>
+       
+      
+
+
+        
+
+        
+  </body>
+</html>
