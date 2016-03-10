@@ -3,22 +3,38 @@
 <head>
   <title><%= title %></title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+        body        { padding-top:80px; }
+    </style>
 </head>
 <body>
   
   <h1> <%= title %> </h1>
   
   <!-- SUBMIT FORM -->
+  <!--
   <script type = "text/javascript">
   function popup(){
     alert ("one metric sent to vidi")
   }  
-  </script>    
-  <form>
+  </script>  
+    
+  <form action="/data" method="post">
     enter your data here:<input type = "text" id ="data" /><br/>
     <input type = "button" value = "done" onclick =" popup();"/>
   </form>  
+  -->
+  <h3><span class="fa fa-sign-in"></span> Submit data here </h3>
+  <form action="/data" method="post">
+    <div class="form-group">
+      <label>data</label>
+      <input type="text" class="form-control" name="data">
+    </div>
+    
+    <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+  </form>
   
   
 </body>
