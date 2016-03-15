@@ -8,6 +8,8 @@ var data = require('./routes/data');
 var emitter = require('vidi-metrics-emitter')
 var app = express();
 var emit = emitter();
+var isJSON = require('is-json');
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
@@ -19,23 +21,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/data', data);
 
-
+// function to send entered data to emitter
 app.post("/data", function (req, res ){
   var name = req.body.query
-  var foo = JSON.stringify({ title: name[0], value: name[1] });
-    // console.log(name[0], name[1]);
-    // console.log(foo);
-    // emit.emit(foo)
-    if (isNaN(name[1]) == true) {
-      console.log("wrong value, you need to enter number")
-      res.send(500, 'wrong value, enter just numbers please for your data field ') 
-    }
-    else {
-      emit.emit(foo)
-      console.log(foo);
-    }
-    
-      })
+  
+  if ( isJSON(name) == false) {
+    console.log("wrong value, you need to enter number")
+    res.send(500, 'wrong value, enter just Json string, please, for your data field ') 
+  }
+  else {
+    emit.emit(name)
+    console.log(name);  
+  }   
+  
+})
 
 
 // catch 404 and forward to error handler
