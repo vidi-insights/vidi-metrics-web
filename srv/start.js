@@ -12,6 +12,7 @@ var http = require('http');
 
 var port = process.env.PORT || '3010';
 app.set('port', port);
+console.log('Listening at: ' + port)
 
 /**
 * Create HTTP server.
