@@ -29,6 +29,13 @@ To run the system simply use npm,
 npm run start
 ```
 
+## Testing
+To test the system use:
+
+```
+npm run test
+```
+
 ## Contributing
 The [nearForm][Org] encourages __open__ and __safe__ participation.
 
