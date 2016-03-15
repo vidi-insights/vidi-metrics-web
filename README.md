@@ -5,12 +5,12 @@
 - __Sponsor:__ [nearForm][Sponsor]
 
 
-a web interface for capturing vidi metrics
+A web interface for capturing vidi metrics.
 
 - __Work in progress__ This module is currently a work in progress.
 
 ## Install
-To install the system locally, simply clone the repo,
+To install the app locally, simply clone the repo,
 
 ```
 git clone https://github.com/vidi-insights/vidi-metrics-web
@@ -23,18 +23,22 @@ npm install
 ```
 
 ## Running
-To run the system simply use npm,
+To run the app run,
 
 ```
 npm run start
 ```
 
-## Testing
-To test the system use:
+Which will start on port `3010`.
+
+### Receiver
+To run a dummy receiver run,
 
 ```
-npm run test
+npm run receiver
 ```
+
+in a second console window. This will echo any metrics sent via the vidi-metrics-web.
 
 ## Contributing
 The [nearForm][Org] encourages __open__ and __safe__ participation.
