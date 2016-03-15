@@ -10,31 +10,32 @@
   </style>
 </head>
 <body>
-  
+
   <h1> <%= title %> </h1>
-  
+
   <!-- SUBMIT FORM -->
-  
+
   <h3><span class="fa submit"></span> Submit data here </h3>
   <form action="/data" method="POST">
     <div class="form-group">
       <label>please, enter your data as a json object here</label>
-      
-      <textarea rows="10" cols="20" id="data" name="query" class="form-control" 
-      placeholder='{"name":"process.heap.used",
-                       "values":{
-                       "value":"239"
-                     },
-                       "tags":{
-                         "pid":"123456",
-                         "tag":"some-tag"
-                      }
-                    }'></textarea><br/>
+
+      <textarea rows="10" cols="20" id="data" name="query" class="form-control"
+placeholder='{
+  "name":"process.heap.used",
+  "values":{
+    "value":"239"
+  },
+  "tags":{
+    "pid":"123456",
+    "tag":"some-tag"
+  }
+}'></textarea><br/>
       <input type = "submit" value = "done"/>
     </div>
-    
-    
+
+
   </form>
-  
+
 </body>
 </html>
