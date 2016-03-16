@@ -25,6 +25,7 @@
     "ejs": "2.3.3",
     "express": "4.13.1",
     "is-json": "2.0.0",
+    "jsonic": "^0.2.2",
     "morgan": "1.6.1",
     "serve-favicon": "2.3.0",
     "vidi-metrics-emitter": "github:vidi-insights/vidi-metrics-emitter"

@@ -10,6 +10,7 @@ var routes = require('./routes/index')
 var data = require('./routes/data')
 var emitter = require('vidi-metrics-emitter')()
 var isJSON = require('is-json')
+var jsonic = require('jsonic')
 
 var port = process.env.PORT || '3010'
 var app = express()
@@ -30,17 +31,25 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', routes)
 app.use('/data', data)
 
+
+//check is input is valid jason and emitt it 
 app.post('/data', function (req, res ){
   var name = req.body.query
-
-  if (isJSON(name)) {
-    emitter.emit(name)
-    console.log(name)
-  }
-  else {
+  if (!name ){
     console.log('Data must be valid JSON')
     res.send(500, 'Data must be valid JSON')
+  } 
+  if ( isJSON(name) == false) {
+    var foo = jsonic.stringify(name)
+    var goodJson = jsonic(foo) 
+    emitter.emit(goodJson)
+    console.log(goodJson)
   }
+  else {  
+    emitter.emit(JSON.parse(name))
+    console.log(name)
+  }
+  
 })
 
 
