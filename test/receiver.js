@@ -5,8 +5,8 @@ var opts = {
   port: process.env.PORT || 5001
 }
 
-var dgram = require('dgram')
-var client = dgram.createSocket('udp4')
+var Dgram = require('dgram')
+var client = Dgram.createSocket('udp4')
 
 console.log('Receiver Started...')
 
