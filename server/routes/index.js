@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
+var Express = require('express')
+var router = Express.Router()
 
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+// GET home page.
+router.get('/', function (req, res, next) {
   res.render('index', {
-      title: 'vidi-metrics-web',
-  });
-});
+    title: 'vidi-metrics-web'
+  })
+})
 
-module.exports = router;
+module.exports = router
