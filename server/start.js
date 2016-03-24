@@ -6,8 +6,11 @@ var Path = require('path')
 var Logger = require('morgan')
 var CookieParser = require('cookie-parser')
 var BodyParser = require('body-parser')
+
 var Routes = require('./routes/index')
 var Data = require('./routes/data')
+var Builder = require('./routes/builder')
+
 var Emitter = require('vidi-metrics-emitter')()
 var IsJSON = require('is-json')
 var Jsonic = require('jsonic')
@@ -30,9 +33,10 @@ app.use(Express.static(Path.join(__dirname, 'public')))
 
 app.use('/', Routes)
 app.use('/data', Data)
+app.use('/builder', Builder)
 
 
-// check is input is valid jason and emitt it
+// check is input from index page is valid json , parse if not and emitt it
 app.post('/data', function (req, res) {
   var name = req.body.query
   if (!name) {
@@ -48,6 +52,31 @@ app.post('/data', function (req, res) {
   else {
     Emitter.emit(JSON.parse(name))
     console.log(name)
+  }
+})
+
+// check inputs from builder page build to json object and emitt it
+app.post('/builder', function (req, res) {
+  var name = req.body.name
+  var value = req.body.value
+  var tag = req.body.tag
+
+  if (!name || !value || !tag) {
+    console.log('Data fields cant be empty')
+    res.send(500, 'Data fields cant be empty')
+  }
+  if (IsJSON(name) === false) {
+    var valueJasonic = Jsonic.stringify(value)
+    var tagJasonic = Jsonic.stringify(tag)
+    var values = Jsonic(valueJasonic)
+    var tags = Jsonic(tagJasonic)
+    var foo = {name, values, tags}
+    Emitter.emit(foo)
+    console.log(foo)
+  }
+  else {
+    Emitter.emit(JSON.parse(value))
+    console.log(value)
   }
 })
 
