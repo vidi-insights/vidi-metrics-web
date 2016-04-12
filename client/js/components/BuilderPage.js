@@ -1,10 +1,14 @@
 import React from "react";
 import Extra from './Extra'
+import IsJSON from 'is-json'
+import Jsonic from 'jsonic'
 
 export default class Paste extends React.Component {
   constructor () {
     super();
     this.state = { input1: '', items: [] };
+    this.state = { input2: '', items: [] };
+    this.state = { input3: '', items: [] };
   }
   
   handleDelete (itemToBeDeleted) {
@@ -19,9 +23,38 @@ export default class Paste extends React.Component {
   handleSubmit (event) {
     event.preventDefault();
     
-    var total = this.state.input1 + this.state.input2 + this.state.input3
-    var newItems = this.state.items.concat(total);
     
+    var name = this.state.input1 
+    var value = this.state.input2 
+    var tag = this.state.input3
+    var valueJasonic = Jsonic.stringify(value)
+    var tagJasonic = Jsonic.stringify(tag)
+    var values = Jsonic(valueJasonic)
+    var tags = Jsonic(tagJasonic)
+    var total = {name, values, tags}
+    
+    
+    if (IsJSON(total) === false) {
+      var foo = Jsonic.stringify(total)
+      var goodJson = Jsonic(foo)
+      
+      console.log('1:', goodJson)      
+    }
+    
+    $.ajax({
+      type: 'POST',
+      url: '/data',
+      data: goodJson,
+      success: (data) => {
+        this.setState({data: data});
+        console.log("2:",  data)
+      },
+      error: (xhr, status, err) => {
+        console.error('/data', status, err.toString());
+      }
+    }) 
+    
+    var newItems = this.state.items.concat(goodJson);    
     console.log("submitted form has value: ", total);
     this.setState({ total: '', items: newItems });
   }
