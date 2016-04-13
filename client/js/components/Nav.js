@@ -17,9 +17,9 @@ export default class Nav extends React.Component {
   render() {
     const { location } = this.props;
     const { collapsed } = this.state;
-    const pasteClass = location.pathname === "/" ? "active" : "";
+    const indexClass = location.pathname === "/" ? "active" : "";
     const builderClass = location.pathname.match(/^\/builder/) ? "active" : "";
-    const settingsClass = location.pathname.match(/^\/settings/) ? "active" : "";
+    const pasteClass = location.pathname.match(/^\/paste/) ? "active" : "";
     const navClass = collapsed ? "collapse" : "";
 
     return (
@@ -35,8 +35,12 @@ export default class Nav extends React.Component {
           </div>
           <div class={"navbar-collapse " + navClass} id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+              
+              <li class={indexClass}>
+                <IndexLink to="/" onClick={this.toggleCollapse.bind(this)}>Home</IndexLink>
+              </li>              
               <li class={pasteClass}>
-                <IndexLink to="/" onClick={this.toggleCollapse.bind(this)}>Paste</IndexLink>
+                <Link to="paste" onClick={this.toggleCollapse.bind(this)}>Paste</Link>
               </li>
               <li class={builderClass}>
                 <Link to="builder" onClick={this.toggleCollapse.bind(this)}>Builder</Link>

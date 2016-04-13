@@ -37,15 +37,16 @@ export default class Paste extends React.Component {
       success: (data) => {
         this.setState({data: data});
         console.log("2:",  data)
+        
       },
       error: (xhr, status, err) => {
         console.error('/data', status, err.toString());
       }
     }) 
-    var newItems = this.state.items.concat(data);
-    
+    this.setState({ text: ''}); 
+    var newItems = this.state.items.concat(data);  
     console.log("submitted form has value: ", data);
-    this.setState({ data: '', items: newItems });     
+        
   }
   
   handleChange (event) {
