@@ -15,11 +15,12 @@
     "url": "https://github.com/vidi-insights/vidi-metrics-web.git"
   },
   "scripts": {
-    "dev": "webpack-dev-server --content-base client --inline --hot",
+    "watch": "webpack --watch",
     "start": "node server/start.js",
     "receiver": "node test/receiver.js"
   },
   "dependencies": {
+    "async": "1.5.2",
     "babel-loader": "^6.2.0",
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-plugin-react-html-attrs": "^2.0.0",

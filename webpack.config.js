@@ -1,35 +1,44 @@
-var debug = process.env.NODE_ENV !== "production";
-var webpack = require('webpack');
-var path = require('path');
+'use strict'
+var Path = require('path')
+
+var buildPath = Path.resolve(__dirname, 'dist')
+var nodeModulesPath = Path.resolve(__dirname, 'node_modules')
+var contextPath = Path.join(__dirname, 'client')
+var entryPath = Path.join(contextPath, 'client.js')
 
 module.exports = {
-  context: path.join(__dirname, "client"),
-  devtool: debug ? "inline-sourcemap" : null,
-  entry: "./js/client.js",
+  context: contextPath,
+  entry: entryPath,
+  resolve: ['', '.js', '.jsx'],
+  output: {
+    path: buildPath,
+    filename: 'js/client.js'
+  },
   module: {
+    noParse: ['react', 'd3'],
+    preLoaders: [{
+      test: /\.(js|jsx)$/,
+      loader: 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0,plugins[]=transform-decorators-legacy,plugins[]=transform-object-rest-spread',
+      exclude: [nodeModulesPath]
+    }],
     loaders: [
       {
-        test: /\.css$/,
-        loaders: ['style', 'css'],
+        test: /index\.html/,
+        loader: 'file?name=index.html'
       },
       {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015', 'stage-0'],
-          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
-        }
+        test: /\.css$/,
+        loader: 'style-loader!css-loader!postcss-loader'
+      },
+      {
+        test: /\.styl/,
+        loader: 'style-loader!css-loader!postcss-loader!stylus-loader'
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        include: Path.join(contextPath, 'assets/img'),
+        loader: 'url-loader?limit=8192&name=img/[hash].[ext]'
       }
     ]
-  },
-  output: {
-    path: __dirname + "/client/",
-    filename: "client.min.js"
-  },
-  plugins: debug ? [] : [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-  ],
-};
+  }
+}
