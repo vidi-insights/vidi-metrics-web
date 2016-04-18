@@ -18,7 +18,11 @@ html {
 
 body {
   margin: 0;
+  background: #eeeeee;
+  color: #333333;
 }
+
+
 
 /* HTML5 display definitions
    ========================================================================== */
@@ -264,6 +268,10 @@ textarea {
 
 button {
   overflow: visible;
+  background-color: #3d5873;
+  color: white;
+
+  
 }
 
 /**
