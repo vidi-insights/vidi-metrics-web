@@ -1,34 +1,26 @@
 'use strict'
 
-var path = require('path');
-var express = require('express');
+// modules required to start server
+var Path = require('path')
+var Express = require('express')
 var Emitter = require('vidi-metrics-emitter')()
-var IsJSON = require ('is-json')
-var Jsonic = require ('jsonic')
-var Emitter = require ('vidi-metrics-emitter/emitter')()
+
 var BodyParser = require('body-parser')
 
-// Server part
+// Server part, starts server on port 3010
 var port = process.env.PORT || '3010'
-var app = express();
-app.use('/', express.static(path.join(__dirname, '../dist')));
+var app = Express()
+app.use('/', Express.static(Path.join(__dirname, '../dist')))
+app.use(BodyParser.json())
+app.use(BodyParser.urlencoded({extended: true}))
 
-
-app.use(BodyParser.json());
-app.use(BodyParser.urlencoded({extended: true}));
-
-
-// emitt input from PastePage 
+// Emitting input from PastePage and BuilderPage
 app.post('/data', function (req, res) {
-    var name = req.body
-     Emitter.emit(name)
-     console.log('server side:' + name)
+  var name = req.body
+  Emitter.emit(name)
+  console.log('server side:' + name)
 })
 
- 
-
-var server = app.listen(port);
-console.log('Server listening on port: ' + port);
-
-
-
+// Printing prot number in conslole
+var server = app.listen(port)
+console.log('Server listening on port: ' + port)
