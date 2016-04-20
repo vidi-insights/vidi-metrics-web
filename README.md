@@ -5,7 +5,9 @@
 - __Sponsor:__ [nearForm][Sponsor]
 
 
-A web interface for capturing vidi metrics.
+A web interface for capturing vidi metrics - where users can submit data in JSON file format.
+This JSON object via UDP emitter goes to InfluxDB that will connect with Graphing instance
+ which will graph data from JSON object.
 
 - __Work in progress__ This module is currently a work in progress.
 
@@ -23,7 +25,18 @@ npm install
 ```
 
 ## Running
-To run the app run,
+To run the app :
+
+1) You need to have webpack installed. If you have no run:   
+```
+npm install webpack -g
+```
+2) then to build app run:
+```
+npm run build
+```
+
+3) and to start server run:
 
 ```
 npm run start
@@ -31,14 +44,19 @@ npm run start
 
 Which will start on port `3010`.
 
+Also you can watch the files for changes and automatically rebuild the sources running this command in a different terminal window:
+```
+npm run watch
+```
+
 ### Receiver
-To run a dummy receiver run,
+To run a dummy receiver, open a second console window and run :
 
 ```
 npm run receiver
 ```
+This will echo any metrics sent via the vidi-metrics-web:
 
-in a second console window. This will echo any metrics sent via the vidi-metrics-web.
 
 ## Contributing
 The [nearForm][Org] encourages __open__ and __safe__ participation.
