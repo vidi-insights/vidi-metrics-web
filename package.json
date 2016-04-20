@@ -16,6 +16,7 @@
   },
   "scripts": {
     "watch": "webpack --watch",
+    "build": "webpack",
     "start": "node server/start.js",
     "receiver": "node test/receiver.js"
   },
