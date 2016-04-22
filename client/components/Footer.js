@@ -2,6 +2,7 @@
 
 import React from 'react'
 
+// footer class rendering link to GH issues of this repository
 export default class Footer extends React.Component {
   render () {
     return (

@@ -7,6 +7,9 @@ import Jsonic from 'jsonic'
 export default class Paste extends React.Component {
   constructor () {
     super()
+    
+  // declaring initial state
+  
     this.state = { input1: '', items: [] }
     this.state = { input2: '', items: [] }
     this.state = { input3: '', items: [] }
@@ -20,6 +23,10 @@ export default class Paste extends React.Component {
     
     this.setState({ items: newItems })
   }
+  
+  /* submit function checking is value JSON 
+  if it is not converting to it and parsing, using models IsJson adn Jsonic, 
+  then ussing ajax and POST to send data to server side*/
   
   handleSubmit (event) {
     event.preventDefault()      
@@ -60,10 +67,17 @@ export default class Paste extends React.Component {
       error: (xhr, status, err) => {
         console.error('/data', status, err.toString())    
       }
-    })     
+    })
+    // alert pop-up message for successful submission
+    alert('your data submitted successfuly \n' + name + value + tag ) 
+    // clearing inputs values for the text fields after submission  
     this.setState({ input1: ' ', input2: ' ', input3: ' '});  
-    console.log('submitted form has value: ', total);    
+    // printing submitted data in the console
+    console.log('submitted data ', total);    
   }
+  
+  /*checking for inputs in text area before submitting data 
+  and  printing entered values into console*/
   
   handleChange (name, event) {
     var change = {}
@@ -71,6 +85,9 @@ export default class Paste extends React.Component {
     this.setState(change)
     console.log(change)    
   }
+  
+  /*making input 3 fields for buildng JSON, for: name, values, tags.
+  as shown in examples*/
   
   render () {
     var total = this.state.input1 + ' ' + this.state.input2 + ' ' + this.state.input3

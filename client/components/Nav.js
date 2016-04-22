@@ -3,6 +3,8 @@
 import React from 'react'
 import {Link } from 'react-router'
 
+
+/* Menu, on click opening navigation for 3 pages Home, Paste, Builder */
 export default class Nav extends React.Component {
   constructor () {
     super()
