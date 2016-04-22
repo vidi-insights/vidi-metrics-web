@@ -6,6 +6,7 @@ var nodeModulesPath = Path.resolve(__dirname, 'node_modules')
 var contextPath = Path.join(__dirname, 'client')
 var entryPath = Path.join(contextPath, 'client.js')
 
+// loaders 
 module.exports = {
   context: contextPath,
   entry: entryPath,

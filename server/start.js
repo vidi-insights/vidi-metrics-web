@@ -4,7 +4,6 @@
 var Path = require('path')
 var Express = require('express')
 var Emitter = require('vidi-metrics-emitter')()
-
 var BodyParser = require('body-parser')
 
 // Server part, starts server on port 3010
@@ -14,13 +13,13 @@ app.use('/', Express.static(Path.join(__dirname, '../dist')))
 app.use(BodyParser.json())
 app.use(BodyParser.urlencoded({extended: true}))
 
-// Emitting input from PastePage and BuilderPage
+// passing submitted data from PastePage and BuilderPage to emitter 
 app.post('/data', function (req, res) {
   var name = req.body
   Emitter.emit(name)
   console.log('server side:' + name)
 })
 
-// Printing prot number in conslole
+// Printing port number in conslole
 var server = app.listen(port)
-console.log('Server listening on port: ' + port)
+console.log('Server listening on port localhost:' + port)

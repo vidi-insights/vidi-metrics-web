@@ -55,7 +55,7 @@ To run a dummy receiver, open a second console window and run :
 ```
 npm run receiver
 ```
-This will echo any metrics sent via the vidi-metrics-web:
+This will echo any metrics sent via the vidi-metrics-web.
 
 
 ## Contributing

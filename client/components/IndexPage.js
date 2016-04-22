@@ -2,6 +2,10 @@
 
 import React from 'react'
 
+/* Home page contains introducton to app,
+ links to BuilderPage and PastePage
+ and links to vidi-insights project in GH and 
+ link to more information about JSON */
 export default class Index extends React.Component {
   render () {
     console.log('index')

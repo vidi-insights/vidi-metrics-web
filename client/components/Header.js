@@ -4,6 +4,7 @@ import React from 'react'
 import {Link} from 'react-router'
 import Menu from './Nav'
 
+/* header class rendering navigation bar and vidi logo */
 export default class Header extends React.Component{
   render () {
     const {showMenu} = this.props
