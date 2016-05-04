@@ -1,4 +1,4 @@
-'use strict'
+ 'use strict'
 
 import React from 'react'
 import IsJSON from 'is-json'
@@ -8,8 +8,11 @@ import Extra from './Extra'
 export default class Paste extends React.Component {
   constructor () {
     super()
+    
+    // declaring initial state
     this.state = { text: '', items: [] }
-  }  
+  } 
+   
   handleDelete (itemToBeDeleted) {
     console.log(itemToBeDeleted)
     var newItems = this.state.items.filter((_item) => {
@@ -19,6 +22,9 @@ export default class Paste extends React.Component {
     this.setState({ items: newItems })
   }
   
+  /* submit function checking is value JSON, 
+  if it is not converting to it and parsing, using models IsJson and Jsonic, 
+  then ussing ajax and POST to send data to server side*/
   handleSubmit (event) {
     event.preventDefault()
     self = this
@@ -51,17 +57,22 @@ export default class Paste extends React.Component {
         console.error('/data', status, err.toString())
       }
     }) 
-    var newItems = this.state.items.concat(data);
+    alert('your data submitted successfuly \n' + data ) 
+    var newItems = this.state.items.concat(data)
     this.setState({ text: '', items: newItems}) 
-    console.log('submitted form has value: ', data)      
+    console.log('submitted data: ', data)      
   }
   
+  /* checking for inputs in text area before submitting data 
+  and  printing entered values into console*/
   handleChange (event) {
     var text = event.target.value
     console.log(text)
     this.setState({ text: text })
   } 
   
+  /* making input field for buildng JSON
+   */
   render () {
     var text = this.state.text
     return <div>
