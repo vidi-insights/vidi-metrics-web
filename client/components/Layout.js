@@ -18,18 +18,18 @@ export default class Layout extends React.Component {
     // header rendering DOM components
     return (
       <div> 
-      //loading header componant
+        {/* loading header componant */}
       <Header/> 
-      //loading navigation bar
+        {/*loading navigation bar */}
       <Nav location={location}/>       
       <div className='container' style={containerStyle}>
       <div className='row'>
       <div className='col-lg-12'>   
-      // rendering children components  
+        {/* rendering children components */} 
       {this.props.children}
       </div>           
       </div> 
-      // loading footer component
+      {/* loading footer component */}
       <Footer/>       
       </div>
       </div>    
