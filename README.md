@@ -26,18 +26,13 @@ npm install
 ```
 
 ## Running
-To run the app :
 
-1) You need to have webpack installed. If you have no run:   
-```
-npm install webpack -g
-```
-2) then to build app run:
+ To build app run:
 ```
 npm run build
 ```
 
-3) and to start server run:
+ To start server run:
 
 ```
 npm run start

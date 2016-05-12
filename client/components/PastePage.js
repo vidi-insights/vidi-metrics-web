@@ -1,4 +1,4 @@
- 'use strict'
+'use strict'
 
 import React from 'react'
 import IsJSON from 'is-json'
@@ -12,7 +12,7 @@ export default class Paste extends React.Component {
     // declaring initial state
     this.state = { text: '', items: [] }
   } 
-   
+  
   handleDelete (itemToBeDeleted) {
     console.log(itemToBeDeleted)
     var newItems = this.state.items.filter((_item) => {
@@ -27,30 +27,33 @@ export default class Paste extends React.Component {
   then ussing ajax and POST to send data to server side*/
   handleSubmit (event) {
     event.preventDefault()
-    self = this
-    
+    self = this    
     var data = this.state.text
-    if (IsJSON(data) === false) {
+      console.log('1:', data)
+   if (IsJSON(data) === true) {
       try {
         var foo = Jsonic.stringify(data)
         var goodJson = Jsonic(foo)    
-      console.log('1:', goodJson)
-    } catch (error) {    
-      alert('error : data mus be valid JSON: \n'
-      + ' 1 example : { "foo":"bar", "red":1 } \n'
-      + ' 2 example : { foo:"bar", red:1 } \n'
-      + ' 3 example : foo:bar, red:1 \n'
-      + ' ' + error)  
-      return false    
-    }      
-    }    
+        console.log('2:', goodJson)
+      } catch (error) {    
+        alert('error : data must be valid JSON: \n'
+        + ' 1 example : {"foo":"bar", "red":1} \n'
+        + ' 2 example : {foo:"bar", red:1} \n'
+        + ' 3 example : foo:bar, red:1 \n'
+        + ' ' + error)  
+        return false    
+      }      
+    } else {
+      var goodJson = Jsonic(data) 
+    } 
+    
     $.ajax({
       type: 'POST',
       url: '/data',
       data: goodJson,
       success: (data) => {
         this.setState({data: data})
-        console.log('2:', data)
+        console.log('3:', data)
         
       },
       error: (xhr, status, err) => {
@@ -72,7 +75,7 @@ export default class Paste extends React.Component {
   } 
   
   /* making text field for submitting JSON
-   */
+  */
   render () {
     var text = this.state.text
     return <div>

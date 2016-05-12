@@ -17,7 +17,7 @@ app.use(BodyParser.urlencoded({extended: true}))
 app.post('/data', function (req, res) {
   var name = req.body
   Emitter.emit(name)
-  console.log('server side:' + name)
+  console.log('server side:' + JSON.stringify(name))
 })
 
 // Printing port number in conslole
