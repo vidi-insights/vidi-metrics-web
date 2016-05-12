@@ -16,6 +16,7 @@ To install the app locally, simply clone the repo,
 
 ```
 git clone https://github.com/vidi-insights/vidi-metrics-web
+cd vidi-metrics-web
 ```
 
 Next, install and build via npm,
