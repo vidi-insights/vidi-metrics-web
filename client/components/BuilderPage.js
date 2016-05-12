@@ -29,16 +29,20 @@ export default class Paste extends React.Component {
   then ussing ajax and POST to send data to server side*/
   
   handleSubmit (event) {
-    event.preventDefault()      
+    event.preventDefault()
+    self = this      
     var name = this.state.input1 
     var value = this.state.input2 
     var tag = this.state.input3
-    try {
-      var valueJasonic = Jsonic.stringify(value)
-      var tagJasonic = Jsonic.stringify(tag)
-      var values = Jsonic(valueJasonic)
-      var tags = Jsonic(tagJasonic)    
-    } catch (error) {    
+    var total = {name, value, tag}
+    if (IsJSON(total) === false) {
+      try {
+      var foo = Jsonic.stringify(total)
+      var goodJson = Jsonic(foo)  
+      console.log('1:', goodJson)      
+    }
+    //try and catch to alert error message
+      catch (error) {    
       alert('error:data mus be valid JSON: \n' 
       + ' 1 example : { "foo":"bar", "red":1 } \n'
       + ' 2 example : { foo:"bar", red:1 } \n'
@@ -46,16 +50,8 @@ export default class Paste extends React.Component {
       + ' ' + error)   
       return false     
     }
-    
-    var total = {name, values, tags}
-        
-    if (IsJSON(total) === false) {
-      var foo = Jsonic.stringify(total)
-      var goodJson = Jsonic(foo)
-      
-      console.log('1:', goodJson)      
     }
-    
+    // sending data to server side using ajax and POST
     $.ajax({
       type: 'POST',
       url: '/data',
@@ -87,7 +83,7 @@ export default class Paste extends React.Component {
   }
   
   /*making input 3 fields for buildng JSON, for: name, values, tags.
-  as shown in examples*/
+  as shown in examples in text fields */
   
   render () {
     var total = this.state.input1 + ' ' + this.state.input2 + ' ' + this.state.input3

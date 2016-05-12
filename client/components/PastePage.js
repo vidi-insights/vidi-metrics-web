@@ -23,7 +23,7 @@ export default class Paste extends React.Component {
   }
   
   /* submit function checking is value JSON, 
-  if it is not converting to it and parsing, using models IsJson and Jsonic, 
+  if it is not, converting to it, parsing, using models IsJson and Jsonic, 
   then ussing ajax and POST to send data to server side*/
   handleSubmit (event) {
     event.preventDefault()
@@ -71,7 +71,7 @@ export default class Paste extends React.Component {
     this.setState({ text: text })
   } 
   
-  /* making input field for buildng JSON
+  /* making text field for submitting JSON
    */
   render () {
     var text = this.state.text
