@@ -15,43 +15,39 @@ export default class Paste extends React.Component {
     this.state = { input3: '', items: [] }
   } 
    
-  handleDelete (itemToBeDeleted) {
-    console.log(itemToBeDeleted)
-    var newItems = this.state.items.filter((_item) => {
-      return _item !== itemToBeDeleted
-    })
-    
-    this.setState({ items: newItems })
-  }
-  
   /* submit function checking is value JSON 
-  if it is not converting to it and parsing, using models IsJson adn Jsonic, 
+  if it is not converting to it and parsing, using models IsJson and Jsonic, 
   then ussing ajax and POST to send data to server side*/
   
   handleSubmit (event) {
-    event.preventDefault()
-    self = this      
-    var name = this.state.input1 
-    var value = this.state.input2 
-    var tag = this.state.input3
-    var total = {name, value, tag}
+    event.preventDefault()      
+      var name = this.state.input1 
+      var value = this.state.input2 
+      var tag = this.state.input3
+        try {
+          var valueJsonic = Jsonic.stringify(value)
+          var tagJsonic = Jsonic.stringify(tag)
+          console.log('1:', valueJsonic, tagJsonic)
+          var values = Jsonic(valueJsonic)
+          var tags = Jsonic(tagJsonic)  
+          } catch (error) {    
+              alert('error : data must be valid not JSON: \n'
+              + ' 1 example : foo:"bar", red:1  \n'
+              + ' 2 example : foo:bar, red:1 \n'
+              + ' 3 example : {"foo":"bar", "red":1} \n'
+              + ' ' + error)  
+              return false    
+            }        
+    var total = {name, values, tags}
+    console.log('2:', total)
+    
     if (IsJSON(total) === false) {
-      try {
-      var foo = Jsonic.stringify(total)
-      var goodJson = Jsonic(foo)  
-      console.log('1:', goodJson)      
-    }
-    //try and catch to alert error message
-      catch (error) {    
-      alert('error:data mus be valid JSON: \n' 
-      + ' 1 example : { "foo":"bar", "red":1 } \n'
-      + ' 2 example : { foo:"bar", red:1 } \n'
-      + ' 3 example : foo:bar, red:1 \n'
-      + ' ' + error)   
-      return false     
-    }
-    }
-    // sending data to server side using ajax and POST
+      
+        var foo = Jsonic.stringify(total)
+        var goodJson = Jsonic(foo)
+        console.log('3:', goodJson)
+      }
+            
     $.ajax({
       type: 'POST',
       url: '/data',
@@ -63,13 +59,10 @@ export default class Paste extends React.Component {
       error: (xhr, status, err) => {
         console.error('/data', status, err.toString())    
       }
-    })
-    // alert pop-up message for successful submission
-    alert('your data submitted successfuly \n' + name + value + tag ) 
-    // clearing inputs values for the text fields after submission  
-    this.setState({ input1: ' ', input2: ' ', input3: ' '});  
-    // printing submitted data in the console
-    console.log('submitted data ', total);    
+    }) 
+    alert('your data submitted successfuly \n' + name + value + tag )     
+    this.setState({ input1: '', input2: '', input3: ''});  
+    console.log('submitted form has value: ', total);    
   }
   
   /*checking for inputs in text area before submitting data 
