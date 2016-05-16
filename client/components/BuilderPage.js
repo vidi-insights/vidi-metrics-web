@@ -32,9 +32,9 @@ export default class Paste extends React.Component {
           var tags = Jsonic(tagJsonic)  
           } catch (error) {    
               alert('error : data must be valid not JSON: \n'
-              + ' 1 example : foo:"bar", red:1  \n'
-              + ' 2 example : foo:bar, red:1 \n'
-              + ' 3 example : {"foo":"bar", "red":1} \n'
+              + ' 1 example : {"foo":"bar", "red":1} \n'
+              + ' 2 example : {foo:"bar", red:1} \n'
+              + ' 3 example : foo:bar, red:1 \n'
               + ' ' + error)  
               return false    
             }        
