@@ -30,7 +30,7 @@ export default class Paste extends React.Component {
     self = this    
     var data = this.state.text
       console.log('1:', data)
-   if (IsJSON(data) === true) {
+   if (IsJSON(data) === false) {
       try {
         var foo = Jsonic.stringify(data)
         var goodJson = Jsonic(foo)    
