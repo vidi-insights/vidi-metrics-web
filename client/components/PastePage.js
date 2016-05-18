@@ -30,22 +30,16 @@ export default class Paste extends React.Component {
     self = this    
     var data = this.state.text
       console.log('1:', data)
-   if (IsJSON(data) === false) {
-      try {
-        var foo = Jsonic.stringify(data)
-        var goodJson = Jsonic(foo)    
-        console.log('2:', goodJson)
-      } catch (error) {    
-        alert('error : data must be valid JSON: \n'
-        + ' 1 example : {"foo":"bar", "red":1} \n'
-        + ' 2 example : {foo:"bar", red:1} \n'
-        + ' 3 example : foo:bar, red:1 \n'
-        + ' ' + error)  
-        return false    
-      }      
-    } else {
+    try {
       var goodJson = Jsonic(data) 
-    } 
+    } catch (error) {    
+      alert('error : data must be valid JSON: \n'
+      + ' 1 example : {"foo":"bar", "red":1} \n'
+      + ' 2 example : {foo:"bar", red:1} \n'
+      + ' 3 example : foo:bar, red:1 \n'
+      + ' ' + error)  
+      return false    
+    }      
     
     $.ajax({
       type: 'POST',

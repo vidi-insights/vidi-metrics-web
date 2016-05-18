@@ -25,11 +25,8 @@ export default class Paste extends React.Component {
       var value = this.state.input2 
       var tag = this.state.input3
         try {
-          var valueJsonic = Jsonic.stringify(value)
-          var tagJsonic = Jsonic.stringify(tag)
-          console.log('1:', valueJsonic, tagJsonic)
-          var values = Jsonic(valueJsonic)
-          var tags = Jsonic(tagJsonic)  
+          var values = Jsonic(value)
+          var tags = Jsonic(tag) 
           } catch (error) {    
               alert('error : data must be valid not JSON: \n'
               + ' 1 example : {"foo":"bar", "red":1} \n'
@@ -38,15 +35,10 @@ export default class Paste extends React.Component {
               + ' ' + error)  
               return false    
             }        
-    var total = {name, values, tags}
-    console.log('2:', total)
-    
-    if (IsJSON(total) === false) {
-      
-        var foo = Jsonic.stringify(total)
-        var goodJson = Jsonic(foo)
-        console.log('3:', goodJson)
-      }
+          var total = {name, values, tags}
+          var goodJson = Jsonic(total)
+          console.log('Submitted data:', goodJson)
+
             
     $.ajax({
       type: 'POST',
@@ -60,7 +52,7 @@ export default class Paste extends React.Component {
         console.error('/data', status, err.toString())    
       }
     }) 
-    alert('your data submitted successfuly \n' + name + value + tag )     
+    alert('your data submitted successfuly \n' + Jsonic.stringify(total) )     
     this.setState({ input1: '', input2: '', input3: ''});  
     console.log('submitted form has value: ', total);    
   }
